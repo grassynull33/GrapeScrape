@@ -16,6 +16,14 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
+  excerpt: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String,
+    default: 'https://s0.wp.com/wp-content/themes/vip/techcrunch-2013/assets/images/210x210.png'
+  },
   // This only saves one note's ObjectId, ref refers to the Note model
   note: {
     type: Schema.Types.ObjectId,
