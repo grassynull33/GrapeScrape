@@ -4,7 +4,13 @@ var Article = require('../models/Article');
 var Note = require('../models/Note');
 
 router.get('/', async function (req, res) {
-  var articles = await Article.find();
+  var articles = await Article.find()
+    .populate('notes')
+    .exec(function (err, doc) {
+      if (err) throw err;
+
+      console.log(doc);
+    });
 
   res.render('index', { articles: articles });
 });
@@ -22,18 +28,31 @@ router.get('/delete/:id', function (req, res) {
 router.post('/add-note/:id', function (req, res) {
   var id = req.params.id;
 
-  var note = new Note(req.body);
+  var newNote = new Note(req.body);
 
-  note.save(function (err, doc) {
+  newNote.save(function (err, doc) {
     if (err) throw err;
 
-    Article.findOneAndUpdate({ _id: id }, { 'note': doc._id }).exec(function (err, doc) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(doc);
+    Article.findByIdAndUpdate(
+      id,
+      {$push: {'notes': doc._id}},
+      {new: true},
+      function (err, newdoc) {
+        if (err) throw err;
+
+        res.send(newdoc);
       }
-    });
+    );
+  });
+});
+
+router.get('/delete-note/:id', function (req, res) {
+  var id = req.params.id;
+
+  Note.findByIdAndRemove(id, function (err) {
+    if (err) throw err;
+
+    res.redirect('/articles');
   });
 });
 

@@ -21,7 +21,12 @@
   <div id="modal-{{this.id}}" class="modal bottom-sheet">
     <div class="modal-content">
       <h4>{{this.title}}</h4>
-      <p>Notes</p>
+      <h5>Notes</h5>
+      <ul>
+        {{#each this.notes}}
+          <li>{{this.body}} <small><a href="/articles/delete-note/{{this.id}}">Delete</a></small></li>
+        {{/each}}
+      </ul>
       <textarea id="textarea-{{this.id}}" class="materialize-textarea"></textarea>
       <label for="textarea-{{this.id}}">Add a note to this article</label>
     </div>

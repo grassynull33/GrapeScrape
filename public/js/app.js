@@ -4,26 +4,18 @@ $(document).ready(function () {
 });
 
 $(document).on('click', '.add-note', function () {
-  // Grab the id associated with the article from the submit button
   var id = $(this).data('id');
 
-  // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: 'POST',
     url: '/articles/add-note/' + id,
     data: {
       body: $('#textarea-' + id).val()
     }
-  })
-    // With that done
-    .done(function (data) {
-      // Log the response
-      console.log(data);
-      // Empty the notes section
-      $('#notes').empty();
-    });
+  }).done(function (data) {
+    console.log(data);
+    $('#textarea-' + id).val('');
 
-  // Also, remove the values entered in the input and textarea for note entry
-  $('#titleinput').val('');
-  $('#bodyinput').val('');
+    window.location.replace('/articles');
+  });
 });
