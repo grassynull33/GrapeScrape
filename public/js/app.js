@@ -1,6 +1,10 @@
 $(document).ready(function () {
   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
   $('.modal').modal();
+
+  $(document).on('click', '.scrape-btn', function () {
+    $('#modal-count').modal('open');
+  });
 });
 
 $(document).on('click', '.add-article', function () {

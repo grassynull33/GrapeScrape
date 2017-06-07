@@ -6,7 +6,7 @@ var Article = require('../models/Article');
 
 // Get Homepage
 router.get('/', function (req, res) {
-  res.render('index');
+  res.render('start');
 });
 
 // Scrape from Source
@@ -27,18 +27,9 @@ router.get('/scrape', function (req, res) {
       if (result.link) {
         scraped.push(result);
       }
-      // var entry = new Article(result);
-
-      // entry.save(function (err, doc) {
-      //   if (err) {
-      //     console.log(err);
-      //   } else {
-      //     console.log(doc);
-      //   }
-      // });
     });
 
-    console.log(scraped);
+    res.locals.scrapeCount = scraped.length;
 
     res.render('scrape', {scraped: scraped});
   });
