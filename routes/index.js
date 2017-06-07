@@ -9,6 +9,7 @@ router.get('/', function (req, res) {
   res.render('index');
 });
 
+// Scrape from Source
 router.get('/scrape', function (req, res) {
   request('https://techcrunch.com/', function (error, response, html) {
     var $ = cheerio.load(html);

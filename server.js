@@ -55,7 +55,7 @@ db.once('open', function () {
 });
 
 app.use('/', routes);
-// app.use('/articles', articles);
+app.use('/articles', articles);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));
