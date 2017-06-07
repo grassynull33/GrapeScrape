@@ -9,10 +9,24 @@
         </div>
         <div class="card-action">
           <a class="waves-effect waves-light btn green" href="{{this.link}}">Read</a>
-          <a class="waves-effect waves-light btn blue" data-id="{{this.id}}">Notes</a>
+          <!-- Modal Trigger -->
+          <a class="waves-effect waves-light btn blue" href="#modal-{{this.id}}">Notes</a>
           <a class="waves-effect waves-light btn red" href="/articles/delete/{{this.id}}">Delete Article</a>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="modal-{{this.id}}" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>{{this.title}}</h4>
+      <p>Notes</p>
+      <textarea id="textarea-{{this.id}}" class="materialize-textarea"></textarea>
+      <label for="textarea-{{this.id}}">Add a note to this article</label>
+    </div>
+    <div class="modal-footer">
+      <a class="waves-effect waves-green btn-flat add-note" data-id="{{this.id}}">Add Note</a>
     </div>
   </div>
 {{/each}}
