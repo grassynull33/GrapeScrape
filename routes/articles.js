@@ -8,4 +8,14 @@ router.get('/', async function (req, res) {
   res.render('index', { articles: articles });
 });
 
+router.get('/delete/:id', function (req, res) {
+  var id = req.params.id;
+
+  Article.findByIdAndRemove(id, function (err) {
+    if (err) throw err;
+
+    res.redirect('/articles');
+  });
+});
+
 module.exports = router;
