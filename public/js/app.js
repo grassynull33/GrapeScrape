@@ -3,6 +3,26 @@ $(document).ready(function () {
   $('.modal').modal();
 });
 
+$(document).on('click', '.add-article', function () {
+  var title = $(this).data('title');
+  var excerpt = $(this).data('excerpt');
+  var image = $(this).data('image');
+  var link = $(this).data('link');
+
+  $.ajax({
+    method: 'POST',
+    url: '/articles/add/',
+    data: {
+      title: title,
+      excerpt: excerpt,
+      image: image,
+      link: link
+    }
+  }).done(function (data) {
+    console.log(data);
+  });
+});
+
 $(document).on('click', '.add-note', function () {
   var id = $(this).data('id');
 

@@ -5,6 +5,7 @@ var Note = require('../models/Note');
 
 router.get('/', async function (req, res) {
   var articles = await Article.find()
+    .sort({'_id': -1})
     .populate('notes')
     .exec(function (err, doc) {
       if (err) throw err;
@@ -13,6 +14,22 @@ router.get('/', async function (req, res) {
     });
 
   res.render('index', { articles: articles });
+});
+
+router.post('/add', function (req, res) {
+  var data = req.body;
+
+  // console.log(data);
+
+  var entry = new Article(data);
+
+  entry.save(function (err, doc) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(doc);
+    }
+  });
 });
 
 router.get('/delete/:id', function (req, res) {
