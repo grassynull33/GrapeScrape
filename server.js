@@ -40,8 +40,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Database configuration with mongoose
-// mongoose.connect(process.env.MONGODB_URI);
-mongoose.connect('mongodb://localhost/GrapeScrape');
+mongoose.connect(process.env.MONGODB_URI);
+// mongoose.connect('mongodb://localhost/GrapeScrape');
 var db = mongoose.connection;
 
 // Show any mongoose errors
